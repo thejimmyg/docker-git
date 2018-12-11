@@ -1,0 +1,9 @@
+.DS_Store
+.git
+.gitignore
+.sw[op]
+node_modules
+hostkeys
+keys
+repo
+test

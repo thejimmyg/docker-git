@@ -1,0 +1,39 @@
+{
+  "name": "docker-git",
+  "version": "0.1.0",
+  "description": "A docker container for hosting Git repos over SSH",
+  "scripts": {
+    "docker:build": "docker build . -t thejimmyg/docker-git:latest",
+    "docker:push": "docker push thejimmyg/docker-git:latest",
+    "docker:run": "mkdir -p keys; mkdir -p hostkeys; mkdir -p repo; docker run -e DEBUG=docker-git -v \"`pwd`/hostkeys:/git/hostkeys/etc/ssh:rw\" -v \"`pwd`/keys:/git/keys:rw\" -v \"`pwd`/repo:/git/repo:rw\" -p 22:22 -p 8002:8002 thejimmyg/docker-git:latest",
+    "dev": "nodemon bin/docker-git.js -e bin/*js,domain/*",
+    "fix": "standard --fix",
+    "start": "node bin/docker-git.js",
+    "downstream": "cd downstream && npm start"
+  },
+  "standard": {
+    "globals": [
+      "fetch",
+      "Headers",
+      "describe",
+      "it",
+      "beforeEach",
+      "afterEach"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thejimmyg/docker-git.git"
+  },
+  "author": "James Gardner",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^10.0.2"
+  },
+  "dependencies": {
+    "debug": "^4.1.0",
+    "express": "^4.15.2",
+    "nodemon": "^1.18.6",
+    "shelljs": "^0.8.3"
+  }
+}
