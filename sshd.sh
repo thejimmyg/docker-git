@@ -24,7 +24,7 @@ echo /usr/sbin/sshd -h /git/hostkeys/etc/ssh/ssh_host_dsa_key -h /git/hostkeys/e
 /usr/sbin/sshd -h /git/hostkeys/etc/ssh/ssh_host_dsa_key -h /git/hostkeys/etc/ssh/ssh_host_ecdsa_key -h /git/hostkeys/etc/ssh/ssh_host_ed25519_key -h /git/hostkeys/etc/ssh/ssh_host_rsa_key $@
 while [ 1 -lt 2 ] 
 do 
-  /bin/echo "."
-  /bin/sleep 10
+  #/bin/echo "."
+  /bin/sleep 0.5
 done
 /bin/echo "Exiting"

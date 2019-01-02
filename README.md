@@ -42,7 +42,7 @@ cd ..
 Clone it somewhere:
 
 ```
-git clone ssh://git@localhost/git/repo/test
+git clone ssh://git@localhost:8022/git/repo/test
 cd test/
 ```
 
@@ -61,13 +61,6 @@ container saves its SSH keys in the `hostkeys` directory you mounted into it
 and it reads the `git` user's SSH key from `keys/authorized_keys`. It shares
 the `repo` directory where repos are stored.
 
-If you want to use a different port on a remote host, for example 8022, you
-need to use this version of the command:
-
-```
-git clone ssh://git@example.com:8022/git/repo/test
-```
-
 There is a sample `docker-compose.yml` in the repo that you can use in your
 setup. Replace the `build` line with the particular version of the image you
 want to use:
@@ -75,3 +68,15 @@ want to use:
 ```
     image: thejimmyg/docker-git:xxx
 ```
+
+## Changelog
+
+### 0.1.1 2019-01-02
+
+* Shortened the sleep time in the `while` loop to 0.5 seconds so that the signal handler can respond more quickly to restarts.
+* Removed printing of the `.` character during while loop.
+
+### 0.1.0 2018-12-11
+
+* Added `docker-compose.yml` file
+* Added signal handlers for `SIGTERM` and `SIGINT`
