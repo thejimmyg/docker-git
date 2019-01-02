@@ -1,5 +1,19 @@
 #!/bin/sh
 
+cleanupInt() {
+  echo "Received a SIGNINT. Exiting ..."
+  exit
+}
+
+cleanupTerm() {
+  echo "Received a SIGTERM. Exiting ..."
+  exit
+}
+
+trap cleanupInt INT
+trap cleanupTerm TERM
+
+
 ssh-keygen -A -f /git/hostkeys
 chown -R git /home/git/.ssh
 chmod 700 /home/git/.ssh

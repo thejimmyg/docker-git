@@ -4,10 +4,10 @@ A simple docker container for Git over SSH.
 
 ```
 npm install
-npm run docker:build
 mkdir keys
 mkdir hostkeys
 mkdir repo
+npm run docker:run:local
 ```
 
 Create a key if you don't already have one:
@@ -68,18 +68,10 @@ need to use this version of the command:
 git clone ssh://git@example.com:8022/git/repo/test
 ```
 
-Here's part of a sample `docker-compose.yml` you could use:
+There is a sample `docker-compose.yml` in the repo that you can use in your
+setup. Replace the `build` line with the particular version of the image you
+want to use:
 
 ```
-version: "3"
-services:
-  git:
-    restart: unless-stopped
-    image: thejimmyg/docker-git:latest
-    ports:
-      - "8022:22"
-    volumes:
-      - ./hostkeys:/git/hostkeys/etc/ssh:rw
-      - ./keys:/git/keys:rw
-      - ./repo:/git/repo:rw
+    image: thejimmyg/docker-git:xxx
 ```

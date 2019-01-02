@@ -1,0 +1,11 @@
+version: "3"
+services:
+  git:
+    restart: unless-stopped
+    build: ./
+    ports:
+      - "8022:22"
+    volumes:
+      - ./hostkeys:/git/hostkeys/etc/ssh:rw
+      - ./keys:/git/keys:rw
+      - ./repo:/git/repo:rw
