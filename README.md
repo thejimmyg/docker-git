@@ -71,6 +71,10 @@ want to use:
 
 ## Changelog
 
+### 0.1.3 2019-01-03
+
+* More efficent way of responding to changes in the `keys/authorized_keys` file using `inotifywatch` and removing the need for `sleep`.
+
 ### 0.1.2 2019-01-03
 
 * Respond to changes in the `keys/authorized_keys` file

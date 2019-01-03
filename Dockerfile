@@ -4,6 +4,7 @@ RUN adduser -h /home/git -s /usr/bin/git-shell -S git
 # Unlocking the git account for SSH
 RUN cat /etc/shadow | sed -e s/git:\!:/git:\*:/g > /etc/shadow
 RUN mkdir -p /git/repo ; mkdir /git/keys ; mkdir /home/git/.ssh ; chmod 700 /home/git/.ssh ; mkdir -p /git/hostkeys/etc/ssh/
+RUN apk --no-cache add inotify-tools
 
 FROM git
 RUN mkdir -p /git/cmd

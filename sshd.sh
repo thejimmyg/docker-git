@@ -23,9 +23,11 @@ chmod 700 /home/git/.ssh
 cp -p /git/keys/authorized_keys /home/git/.ssh/authorized_keys
 echo /usr/sbin/sshd -h /git/hostkeys/etc/ssh/ssh_host_dsa_key -h /git/hostkeys/etc/ssh/ssh_host_ecdsa_key -h /git/hostkeys/etc/ssh/ssh_host_ed25519_key -h /git/hostkeys/etc/ssh/ssh_host_rsa_key $@
 /usr/sbin/sshd -h /git/hostkeys/etc/ssh/ssh_host_dsa_key -h /git/hostkeys/etc/ssh/ssh_host_ecdsa_key -h /git/hostkeys/etc/ssh/ssh_host_ed25519_key -h /git/hostkeys/etc/ssh/ssh_host_rsa_key $@
-while [ 1 -lt 2 ] 
-do 
-  /bin/sleep 1
-  cp -puv /git/keys/authorized_keys /home/git/.ssh/authorized_keys
-done
-/bin/echo "Exiting"
+inotifywait -e modify,close_write,moved_to,create /git/keys/ | while read -r directory events filename; do
+  /bin/echo "$directory" "$events" "$filename"
+  if [ "$filename" = "authorized_keys" ]; then
+    /bin/echo "Changed /git/keys/authorized_keys. Exiting so that the container can be automatically restarted ..."
+    exit 0
+  fi
+done &
+wait
