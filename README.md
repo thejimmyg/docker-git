@@ -71,9 +71,13 @@ want to use:
 
 ## Changelog
 
+### 0.1.2 2019-01-03
+
+* Respond to changes in the `keys/authorized_keys` file
+
 ### 0.1.1 2019-01-02
 
-* Shortened the sleep time in the `while` loop to 0.5 seconds so that the signal handler can respond more quickly to restarts.
+* Shortened the sleep time in the `while` loop so that the signal handler can respond more quickly to restarts.
 * Removed printing of the `.` character during while loop.
 
 ### 0.1.0 2018-12-11
